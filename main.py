@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
 from routers import upload, parse, documents, diagnosis, evaluation
+from routers import point_analysis
 
 app = FastAPI(title="工业智能维保多 Agent 系统", version="2.0")
 
@@ -23,12 +24,19 @@ app.include_router(parse.router)
 app.include_router(documents.router)
 app.include_router(diagnosis.router)
 app.include_router(evaluation.router)
+app.include_router(point_analysis.router)
 
 
 @app.get("/")
 async def root():
     """返回前端页面"""
     return FileResponse(Path(__file__).parent / "frontend" / "index.html")
+
+
+@app.get("/point-analysis")
+async def point_analysis_page():
+    """点位重要性分析页面。"""
+    return FileResponse(Path(__file__).parent / "frontend" / "point-analysis.html")
 
 
 @app.get("/health")

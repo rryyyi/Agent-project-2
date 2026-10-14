@@ -374,7 +374,7 @@ def score_point(point: dict[str, Any], item: dict[str, Any], reviewer: dict[str,
     logic_path = bool(refs and (outputs or faults or item.get("downstream_states")))
     evidence_locations = all(x.get("source_file") and x.get("location") and x.get("quote") for x in refs + evidence)
     changed_case = any(x.get("changed") is True for x in cases)
-    reviewer_ok = not reviewer or reviewer.get("review_status", "accepted") in {"accepted", "confirmed", "corrected"}
+    reviewer_ok = bool(reviewer and reviewer.get("review_status") in {"accepted", "confirmed", "corrected"})
     contradictions = _unique_strings(item.get("contradictions"))
     gates_ok = bool(_has_exact_identity(point, item) and logic_path and changed_case and evidence_locations
                     and citations_verified and reviewer_ok and not contradictions)
