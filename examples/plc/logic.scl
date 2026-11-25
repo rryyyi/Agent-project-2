@@ -1,0 +1,22 @@
+// SYNTHETIC DEMO ONLY. Text evidence for the analysis UI.
+// Not a deployable PLC program. No actual device is controlled.
+// Device: DEMO-CONVEYOR
+// Symbol mapping:
+// SafetyDoorClosed -> I0.0 (Input)
+// StartRequest -> I0.1 (Input)
+// MotorOverload -> I0.2 (Input)
+// RunCommand -> Q0.0 (Output)
+
+// Network 1: Run permissive
+// Source expression: I0.0 AND NOT I0.2 -> M0.0
+"RunPermissive" := "SafetyDoorClosed" AND NOT "MotorOverload";
+
+// Network 2: Motor command
+// Source expression: M0.0 AND I0.1 -> Q0.0
+"RunCommand" := "RunPermissive" AND "StartRequest";
+
+// Network 3: Synthetic state comparison for manual review
+// Case A: SafetyDoorClosed=TRUE, MotorOverload=FALSE, StartRequest=TRUE -> RunCommand=TRUE
+// Case B: SafetyDoorClosed=FALSE, MotorOverload=FALSE, StartRequest=TRUE -> RunCommand=FALSE
+// Case C: SafetyDoorClosed=TRUE, MotorOverload=TRUE, StartRequest=TRUE -> RunCommand=FALSE
+// These cases describe the expression above; they are not PLC execution logs.

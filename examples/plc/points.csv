@@ -1,0 +1,5 @@
+Device,Name,Address,Type
+DEMO-CONVEYOR,SafetyDoorClosed,I0.0,Input
+DEMO-CONVEYOR,StartRequest,I0.1,Input
+DEMO-CONVEYOR,MotorOverload,I0.2,Input
+DEMO-CONVEYOR,RunCommand,Q0.0,Output

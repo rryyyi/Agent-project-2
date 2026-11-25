@@ -5,3 +5,14 @@ runtime/
 models/gguf/
 storage/
 .pytest_cache/
+.env
+.env.*
+!.env.example
+venv/
+node_modules/
+.coverage
+htmlcov/
+.ruff_cache/
+.superpowers/
+.DS_Store
+Thumbs.db
